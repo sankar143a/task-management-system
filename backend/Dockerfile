@@ -4,8 +4,8 @@ WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Production stage
-FROM openjdk:17-jdk-alpine
+# Production stage - ఇక్కడ image మార్చాను
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/target/classes /app/classes
 COPY --from=build /app/lib /app/lib
