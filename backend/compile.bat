@@ -1,0 +1,19 @@
+@echo off
+set JAVA_HOME=C:\Program Files\Java\jdk-17.0.12
+set PATH=%JAVA_HOME%\bin;%PATH%
+
+echo Compiling Java files...
+
+if not exist "bin" mkdir bin
+
+javac -cp "lib\gson-2.8.9.jar;lib\mysql-connector-j-9.6.0.jar" -d bin src\*.java
+
+if %errorlevel% equ 0 (
+    echo Compilation successful!
+) else (
+    echo Compilation failed!
+    pause
+    exit /b %errorlevel%
+)
+
+pause
