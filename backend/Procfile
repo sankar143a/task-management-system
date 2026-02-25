@@ -1,0 +1,1 @@
+echo web: java -cp target/classes:lib/* Main > backend\Procfile

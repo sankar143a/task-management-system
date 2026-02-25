@@ -1,0 +1,9 @@
+echo services: > render.yaml
+echo   - type: web >> render.yaml
+echo     name: task-management-backend >> render.yaml
+echo     runtime: java >> render.yaml
+echo     repo: https://github.com/sankar143a/task-management-system >> render.yaml
+echo     buildCommand: cd backend ^&^& mvn clean package >> render.yaml
+echo     startCommand: cd backend ^&^& java -cp target/classes:lib/* Main >> render.yaml
+echo     plan: free >> render.yaml
+echo     branch: main >> render.yaml
