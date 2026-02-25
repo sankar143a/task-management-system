@@ -1,0 +1,19 @@
+FROM openjdk:17-jdk-slim
+
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
+# Set working directory
+WORKDIR /app
+
+# Copy all backend files
+COPY . /app
+
+# Build the application
+RUN mvn clean package
+
+# Expose port (adjust if needed)
+EXPOSE 8080
+
+# Run the application
+CMD ["java", "-cp", "target/classes:lib/*", "Main"]
