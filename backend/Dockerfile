@@ -1,13 +1,17 @@
 # Build stage
 FROM maven:3.9.9-eclipse-temurin-17-focal AS build
 WORKDIR /app
-COPY . .
+# backend folder ని /app/backend లోకి copy చేయండి
+COPY backend /app/backend
+# backend folder లోకి వెళ్లి build చేయండి
+WORKDIR /app/backend
 RUN mvn clean package -DskipTests
 
-# Production stage - ఇక్కడ image మార్చాను
+# Production stage
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
-COPY --from=build /app/target/classes /app/classes
-COPY --from=build /app/lib /app/lib
+# Compiled files ని సరైన path నుండి copy చేయండి
+COPY --from=build /app/backend/target/classes /app/classes
+COPY --from=build /app/backend/lib /app/lib
 EXPOSE 8080
 CMD ["java", "-cp", "classes:lib/*", "Main"]
